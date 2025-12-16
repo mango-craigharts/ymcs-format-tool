@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/ymcs-format-tool/static/css/main.0b5c7e01.css",
-    "main.js": "/ymcs-format-tool/static/js/main.41fe8909.js",
+    "main.js": "/ymcs-format-tool/static/js/main.97391ac8.js",
     "static/js/453.2f7a2504.chunk.js": "/ymcs-format-tool/static/js/453.2f7a2504.chunk.js",
     "static/media/dark-logo.png": "/ymcs-format-tool/static/media/dark-logo.2e5304e62614febc92ed.png",
     "index.html": "/ymcs-format-tool/index.html",
     "main.0b5c7e01.css.map": "/ymcs-format-tool/static/css/main.0b5c7e01.css.map",
-    "main.41fe8909.js.map": "/ymcs-format-tool/static/js/main.41fe8909.js.map",
+    "main.97391ac8.js.map": "/ymcs-format-tool/static/js/main.97391ac8.js.map",
     "453.2f7a2504.chunk.js.map": "/ymcs-format-tool/static/js/453.2f7a2504.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0b5c7e01.css",
-    "static/js/main.41fe8909.js"
+    "static/js/main.97391ac8.js"
   ]
 }
