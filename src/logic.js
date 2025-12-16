@@ -13,10 +13,7 @@ function clearScreen() {
 }
 
 // Get Documents folder
-function getDocumentsPath() {
-  const home = os.homedir();
-  return path.join(home, 'Documents');
-}
+
 
 // Format MAC address
 function formatMAC(mac) {
@@ -31,9 +28,7 @@ function main(filePath) {
     .toISOString()
     .replace(/[-:T]/g, '')
     .split('.')[0]; // YYYYMMDD_HHMMSS format
-  const exportPath = getDocumentsPath();
   const fileName = `devices_${timestamp}.xlsx`;
-  const fullPath = path.join(exportPath, fileName);
 
   let csvData;
   while (true) {

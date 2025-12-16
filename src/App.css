@@ -93,3 +93,85 @@ button:active {
   color: #333;
   min-height: 22px;
 }
+
+/* ----- Rows ----- */ 
+.info-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #fafafa;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.row {
+  display: flex;          /* layout children in a row */
+  align-items: center;    /* vertically center */
+  gap: 12px;              /* spacing between elements */
+  margin-bottom: 12px;
+}
+
+.row-number {
+  width: 24px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.row-input {
+  flex: 1;               /* inputs grow to fill space */
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.remove-button {
+  padding: 6px 12px;
+  background: #ff6b6b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.add-button {
+  padding: 8px 16px;
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.export-button {
+  margin-top: 16px
+}
+
+/* Tabs */
+
+.Tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.Tab {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  cursor: pointer;
+  color: #000
+}
+
+.Tab.active {
+  background: #fff;
+  border-bottom: 2px solid #000;
+  font-weight: bold;
+}

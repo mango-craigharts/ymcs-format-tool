@@ -89,7 +89,8 @@ function MangoLogo() {
   )
 }
 
-function App() {
+function CsvFormatTool() {
+
   const [selectedFile, setSelectedFile] = useState(null);
   const [status, setStatus] = useState("");
 
@@ -157,26 +158,145 @@ function App() {
   };
 
   return (
+    <>
+      <h1>YMCS Format Tool</h1>
+
+      <div className="FileInputWrapper">
+        <label className="FileInputLabel">Upload CSV:</label>
+        <input
+          type="file"
+          accept=".csv"
+          onChange={handleFileChange}
+          className="Input"
+        />
+      </div>
+
+      <button onClick={handleFormat}>Format</button>
+
+      <p className="Status">{status}</p>
+    </>
+  )
+}
+
+function InfoPairToXLSX() {
+  const [status, setStatus] = useState("");
+  const [rows, setRows] = useState([
+    { mac: "", serial: "" }
+  ]);
+
+  const handleAddRow = () => {
+    setRows(prev => [...prev, { mac: "", serial: "" }]);
+  };
+
+  const handleRemoveRow = (index) => {
+    setRows(prev => prev.filter((_, i) => i !== index))
+  }
+
+  const handleChange = (index, field, value) => {
+    setRows(prev =>
+      prev.map((row, i) =>
+        i === index
+          ? { ...row, [field]: value }
+          : row
+      )
+    );
+  };
+
+  const handleFormat = () => {
+    if (rows[0].mac === "" || rows[0].serial === "") {
+      setStatus("Please add at least one entry.")
+      return;
+    }
+    setStatus("Processing...");
+
+    const rowsWithEmpty = [{ MAC: "", Serial: "" }, ...rows.map(r => ({ MAC: r.mac, Serial: r.serial }))];
+
+    const worksheet = XLSX.utils.json_to_sheet(rowsWithEmpty);
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "MAC_Serial");
+
+    const timestamp = new Date()
+      .toISOString()
+      .replace(/[-:T]/g, "")
+      .split(".")[0];
+    
+      const filename = `ymcs_import_${timestamp}.xlsx`
+    
+    XLSX.writeFile(workbook, filename);
+  }
+
+  return (
+    <>
+      <h2>MAC & Serial Input</h2>
+      {rows.map((row, index) => (
+        <div className="row" key={index}>
+            <span className="row-number">{index + 1}</span>
+
+            <input
+              type="text"
+              placeholder="MAC"
+              value={row.mac}
+              onChange={e =>
+                handleChange(index, "mac", e.target.value)
+              }
+              className="row-input"
+            />
+
+            <input
+              type="text"
+              placeholder="Serial Number"
+              value={row.serial}
+              onChange={e =>
+                handleChange(index, "serial", e.target.value)
+              }
+              className="row-input"
+            />
+          
+        </div>
+
+      ))}
+
+      <div className="button-row">
+        <button onClick={handleAddRow} className="add-button">Add Row</button>
+        <button onClick={() => handleRemoveRow(rows.length - 1)} className="remove-button">Remove Row</button>
+      </div>
+      <button onClick={handleFormat} className="export-button">Export</button>
+      <p className="Status">{status}</p>
+    </>
+  );
+}
+
+function App() {
+  
+  const [activeTab, setActiveTab] = useState("csv");
+
+  return (
     <div className="App">
       <div className="Card">
 
         <MangoLogo />
 
-        <h1>YMCS Format Tool</h1>
+        {/* Tabs */}
+        <div className="Tabs">
+          <button
+            className={activeTab === "csv" ? "Tab active" : "Tab"}
+            onClick={() => setActiveTab("csv")}
+          >
+            CSV Formatter
+          </button>
 
-        <div className="FileInputWrapper">
-          <label className="FileInputLabel">Upload CSV:</label>
-          <input
-            type="file"
-            accept=".csv"
-            onChange={handleFileChange}
-            className="Input"
-          />
+          <button
+            className={activeTab === "pair-input" ? "Tab active" : "Tab"}
+            onClick={() => setActiveTab("pair-input")}
+          >
+            MAC and Serial Input
+          </button>
         </div>
 
-        <button onClick={handleFormat}>Format</button>
-
-        <p className="Status">{status}</p>
+        {/* Tool Render */}
+        {activeTab === "csv" && <CsvFormatTool />}
+        {activeTab === "pair-input" && <InfoPairToXLSX />}
 
       </div>
     </div>
