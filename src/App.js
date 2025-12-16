@@ -159,7 +159,7 @@ function CsvFormatTool() {
 
   return (
     <>
-      <h1>YMCS Format Tool</h1>
+      <h1>CSV Format Tool</h1>
 
       <div className="FileInputWrapper">
         <label className="FileInputLabel">Upload CSV:</label>
@@ -228,7 +228,7 @@ function InfoPairToXLSX() {
 
   return (
     <>
-      <h2>MAC & Serial Input</h2>
+      <h1>MAC & Serial Input</h1>
       {rows.map((row, index) => (
         <div className="row" key={index}>
             <span className="row-number">{index + 1}</span>
